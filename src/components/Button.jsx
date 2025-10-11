@@ -1,7 +1,7 @@
-export const Button = () => {
+export const Button = ({ className = "", children, type = "button" }) => {
   return (
-    <button className="button" type="submit">
-      Add
+    <button className={`button ${className}`} type={type}>
+      {children}
     </button>
   );
 };
