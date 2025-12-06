@@ -1,6 +1,13 @@
 import React from "react";
 
-export const Todoitem = ({ title, isDone, className = "", id }) => {
+export const Todoitem = ({
+  title,
+  isDone,
+  className = "",
+  id,
+  onDeleteButtonClick,
+  onTaskCompleteChange,
+}) => {
   return (
     <li className={`todo-item ${className}`}>
       <input
@@ -8,7 +15,7 @@ export const Todoitem = ({ title, isDone, className = "", id }) => {
         id={id}
         type="checkbox"
         checked={isDone}
-        readOnly
+        onChange={({ target }) => onTaskCompleteChange(id, target.checked)}
       />
       <label className="todo-item__label" htmlFor={id}>
         {title}
@@ -17,6 +24,8 @@ export const Todoitem = ({ title, isDone, className = "", id }) => {
         className="todo-item__delete-button"
         aria-label="Delete"
         title="Delete"
+        type="button"
+        onClick={() => onDeleteButtonClick(id)}
       >
         <svg
           width="20"

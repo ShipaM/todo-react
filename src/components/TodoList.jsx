@@ -1,5 +1,9 @@
 import { Todoitem } from "./Todoitem";
-export const TodoList = ({ tasks = [] }) => {
+export const TodoList = ({
+  tasks = [],
+  onDeleteButtonClick,
+  onTaskCompleteChange,
+}) => {
   const hasTasks = true;
 
   if (!hasTasks) return <div className="todo__empty-message"></div>;
@@ -8,11 +12,13 @@ export const TodoList = ({ tasks = [] }) => {
     <ul className="todo__list">
       {tasks.map((task) => (
         <Todoitem
-          key={task}
+          key={task.id}
           className="todo__item"
           id={task.id}
           title={task.title}
           isDone={task.isDone}
+          onDeleteButtonClick={onDeleteButtonClick}
+          onTaskCompleteChange={onTaskCompleteChange}
         />
       ))}
     </ul>
