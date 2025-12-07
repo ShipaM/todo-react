@@ -4,6 +4,8 @@ export const TodoList = ({
   onDeleteButtonClick,
   onTaskCompleteChange,
   filteredTasks,
+  firstIncompleteTaskId,
+  firstIncompleteTaskRef,
 }) => {
   const hasTasks = tasks.length > 0;
 
@@ -21,6 +23,9 @@ export const TodoList = ({
         <Todoitem
           key={task.id}
           className="todo__item"
+          ref={
+            task.id === firstIncompleteTaskId ? firstIncompleteTaskRef : null
+          }
           id={task.id}
           title={task.title}
           isDone={task.isDone}
