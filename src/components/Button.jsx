@@ -3,9 +3,15 @@ export const Button = ({
   children,
   type = "button",
   onClick,
+  isDisabled,
 }) => {
   return (
-    <button className={`button ${className}`} type={type} onClick={onClick}>
+    <button
+      className={`button ${className}`}
+      type={type}
+      onClick={onClick}
+      disabled={isDisabled}
+    >
       {children}
     </button>
   );
