@@ -1,7 +1,12 @@
 import { Button } from "./Button";
 import { Field } from "./Field";
+import { useContext } from "react";
+import { TasksContext } from "../context/task-context";
 
-export const AddTaskForm = ({ addTask, newTaskTitle, setNewTaskTitle }) => {
+export const AddTaskForm = () => {
+  const { addTask, newTaskTitle, setNewTaskTitle, newTaskInputRef } =
+    useContext(TasksContext);
+
   const onSubmit = (e) => {
     e.preventDefault();
     addTask();
@@ -15,6 +20,7 @@ export const AddTaskForm = ({ addTask, newTaskTitle, setNewTaskTitle }) => {
         label={"New task title"}
         value={newTaskTitle}
         onInput={(e) => setNewTaskTitle(e.target.value)}
+        ref={newTaskInputRef}
       />
       <Button type="submit" className="todo__add-button">
         Add
