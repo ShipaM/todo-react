@@ -1,3 +1,5 @@
+import styles from "./Button.module.scss";
+
 export const Button = ({
   className = "",
   children,
@@ -7,7 +9,7 @@ export const Button = ({
 }) => {
   return (
     <button
-      className={`button ${className}`}
+      className={`${styles.button} ${className}`}
       type={type}
       onClick={onClick}
       disabled={isDisabled}
