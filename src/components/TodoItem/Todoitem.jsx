@@ -2,6 +2,7 @@ import { memo, useContext } from "react";
 import RouterLink from "../RouterLink/RouterLink";
 import styles from "./Todoitem.module.scss";
 import { TasksContext } from "../../context/task-context";
+// import { useCombinedRefs } from "../../hooks/useCombinedRefs";
 
 export const Todoitem = memo(({ title, isDone, className = "", id }) => {
   const {
@@ -9,11 +10,32 @@ export const Todoitem = memo(({ title, isDone, className = "", id }) => {
     deleteTask,
     firstIncompleteTaskId,
     toggleTaskComplete,
+    disappearingTaskId,
+    appearingTaskId,
   } = useContext(TasksContext);
+
+  // const animationRef = useRef(null);
+  // const combinedRef = useCombinedRefs(
+  //   id === firstIncompleteTaskId ? firstIncompleteTaskRef : null,
+  //   animationRef
+  // );
+
+  // const handleClick = () => {
+  //   animationRef.current?.classList.add(styles.isDisappearing);
+
+  //   setTimeout(() => {
+  //     deleteTask(id);
+  //   }, 400);
+  // };
 
   return (
     <li
-      className={`${styles.todoItem} ${className}`}
+      className={`
+    ${styles.todoItem} 
+    ${className}
+    ${id === disappearingTaskId ? styles.isDisappearing : ""} 
+    ${id === appearingTaskId ? styles.isAppearing : ""}`}
+      // ref={combinedRef}
       ref={id === firstIncompleteTaskId ? firstIncompleteTaskRef : null}
     >
       <input
