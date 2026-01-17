@@ -94,10 +94,29 @@
   background-color: transparent;
   border: none;
   border-radius: inherit;
+  cursor: pointer;
+  transition:
+    color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out,
+    outline 0.15s ease-in-out;
 
   &:hover {
     color: var(--color-white);
     background-color: var(--color-dark-1);
+  }
+
+  &:focus {
+    outline: 2px solid var(--color-dark-2);
+    outline-offset: -2px;
+  }
+
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-dark-2);
+    outline-offset: -2px;
   }
 
   &:active {

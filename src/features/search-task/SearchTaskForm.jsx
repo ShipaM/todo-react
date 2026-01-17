@@ -5,7 +5,12 @@ import { TasksContext } from "@/entities/todo";
 export const SearchTaskForm = ({ styles }) => {
   const { searchQuery, setSearchQuery } = useContext(TasksContext);
   return (
-    <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
+    <form
+      className={styles.form}
+      onSubmit={(e) => e.preventDefault()}
+      role="search"
+      aria-label="Search tasks"
+    >
       <Field
         className={styles.field}
         id={"search-task"}

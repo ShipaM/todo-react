@@ -6,11 +6,15 @@ import { Button } from "@/shared/ui/Button";
 import { useContext } from "react";
 import { TasksContext } from "@/entities/todo";
 import styles from "./Todo.module.scss";
+
 export const Todo = () => {
   const { firstIncompleteTaskRef } = useContext(TasksContext);
+
   return (
-    <div className={styles.todo}>
-      <h1 className={styles.title}>To Do List</h1>
+    <main className={styles.todo} role="main" aria-label="Todo application">
+      <h1 className={styles.title} id="todo-heading">
+        To Do List
+      </h1>
       <AddTaskForm styles={styles} />
       <SearchTaskForm styles={styles} />
       <TodoInfo styles={styles} />
@@ -18,10 +22,13 @@ export const Todo = () => {
         onClick={() =>
           firstIncompleteTaskRef.current?.scrollIntoView({ behavior: "smooth" })
         }
+        ariaLabel="Scroll to first incomplete task"
       >
         Show first incomplete task
       </Button>
-      <TodoList styles={styles} />
-    </div>
+      <section aria-labelledby="todo-heading">
+        <TodoList styles={styles} />
+      </section>
+    </main>
   );
 };

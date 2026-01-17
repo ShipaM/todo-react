@@ -30,7 +30,12 @@ export const AddTaskForm = ({ styles }) => {
   };
 
   return (
-    <form className={styles.form} onSubmit={onSubmit}>
+    <form
+      className={styles.form}
+      onSubmit={onSubmit}
+      aria-label="Add new task form"
+      role="form"
+    >
       <Field
         className={styles.field}
         id={"new-task"}
@@ -39,11 +44,13 @@ export const AddTaskForm = ({ styles }) => {
         error={error}
         onInput={onInput}
         ref={newTaskInputRef}
+        required
       />
       <Button
         type="submit"
         className="todo__add-button"
         isDisabled={isNewTaskTitleEmpty}
+        ariaLabel="Add new task"
       >
         Add
       </Button>

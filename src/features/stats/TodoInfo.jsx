@@ -7,24 +7,35 @@ export const TodoInfo = memo(({ styles }) => {
   const total = tasks.length;
   const done = useMemo(
     () => tasks.filter((task) => task.isDone).length,
-    [tasks]
+    [tasks],
   );
   const hasTasks = total > 0;
+  const remaining = total - done;
 
   return (
-    <div className={styles.info}>
-      <div className={styles.totalTasks}>
-        Done {done} from {total}
+    <section className={styles.info} aria-label="Task statistics">
+      <div
+        className={styles.totalTasks}
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        <span
+          aria-label={`${done} tasks completed out of ${total} total. ${remaining} tasks remaining.`}
+        >
+          Done {done} from {total}
+        </span>
       </div>
       {hasTasks && (
         <button
           className={styles.deleteAllButton}
           type="button"
           onClick={deleteAllTasks}
+          aria-label={`Delete all ${total} tasks`}
         >
           Delete all
         </button>
       )}
-    </div>
+    </section>
   );
 });

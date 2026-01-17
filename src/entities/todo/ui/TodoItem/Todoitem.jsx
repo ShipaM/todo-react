@@ -28,6 +28,8 @@ export const Todoitem = memo(({ title, isDone, className = "", id }) => {
   //   }, 400);
   // };
 
+  const taskStatus = isDone ? "completed" : "incomplete";
+
   return (
     <li
       className={`
@@ -37,6 +39,7 @@ export const Todoitem = memo(({ title, isDone, className = "", id }) => {
     ${id === appearingTaskId ? styles.isAppearing : ""}`}
       // ref={combinedRef}
       ref={id === firstIncompleteTaskId ? firstIncompleteTaskRef : null}
+      aria-label={`Task: ${title}, ${taskStatus}`}
     >
       <input
         className={styles.checkbox}
@@ -44,17 +47,21 @@ export const Todoitem = memo(({ title, isDone, className = "", id }) => {
         type="checkbox"
         checked={isDone}
         onChange={({ target }) => toggleTaskComplete(id, target.checked)}
+        aria-label={`Mark "${title}" as ${isDone ? "incomplete" : "complete"}`}
       />
       <label className={`${styles.label} visually-hidden`} htmlFor={id}>
-        {title}
+        {isDone ? `Unmark ${title} as done` : `Mark ${title} as done`}
       </label>
-      <RouterLink to={`/tasks/${id}`} aria-label="Task detail page">
+      <RouterLink
+        to={`/tasks/${id}`}
+        aria-label={`View details for task: ${title}`}
+      >
         {title}
       </RouterLink>
       <button
         className={styles.deleteButton}
-        aria-label="Delete"
-        title="Delete"
+        aria-label={`Delete task: ${title}`}
+        title={`Delete task: ${title}`}
         type="button"
         onClick={() => deleteTask(id)}
       >
@@ -64,6 +71,8 @@ export const Todoitem = memo(({ title, isDone, className = "", id }) => {
           viewBox="0 0 20 20"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+          focusable="false"
         >
           <path
             d="M15 5L5 15M5 5L15 15"

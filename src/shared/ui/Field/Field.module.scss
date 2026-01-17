@@ -26,15 +26,29 @@
   background-color: transparent;
   border: var(--border);
   border-radius: var(--border-radius);
+  transition:
+    border-color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
 
-  &:hover,
-  &:focus {
+  &:hover {
     border-color: var(--color-dark-2);
   }
 
   &:focus {
     background-color: var(--color-gray-1);
+    border-color: var(--color-dark-2);
+    outline: 2px solid var(--color-dark-2);
+    outline-offset: 2px;
+  }
+
+  &:focus:not(:focus-visible) {
     outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-dark-2);
+    outline-offset: 2px;
   }
 
   &[type="search"] {
@@ -51,6 +65,11 @@
 
   &.isInvalid {
     border-color: red;
+
+    &:focus,
+    &:focus-visible {
+      outline-color: red;
+    }
   }
 }
 

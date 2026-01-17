@@ -4,7 +4,7 @@ body {
   align-items: start;
   min-height: 100vh;
   padding: 100px 30px;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   background-color: var(--color-gray-1);
 }
 
@@ -18,4 +18,46 @@ button {
   outline: 2px dashed var(--color-black);
   outline-offset: 4px;
   transition-duration: 0s !important;
+}
+
+/* Skip link for keyboard navigation */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  padding: 8px 16px;
+  background-color: var(--color-dark-2);
+  color: var(--color-white);
+  text-decoration: none;
+  z-index: 1000;
+  transition: top 0.2s ease-in-out;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --border: 2px solid currentColor;
+  }
+
+  button:focus,
+  input:focus,
+  a:focus {
+    outline-width: 3px;
+  }
 }
