@@ -2,6 +2,7 @@ import { memo, useContext } from "react";
 import styles from "./Todoitem.module.scss";
 import { TasksContext } from "../../model/task-context";
 import RouterLink from "@/shared/ui/RouterLink";
+import { highlightCaseInsensitive } from "@/shared/utils/highlight";
 // import { useCombinedRefs } from "../../../../hooks/useCombinedRefs";
 
 export const Todoitem = memo(({ title, isDone, className = "", id }) => {
@@ -12,6 +13,7 @@ export const Todoitem = memo(({ title, isDone, className = "", id }) => {
     toggleTaskComplete,
     disappearingTaskId,
     appearingTaskId,
+    searchQuery,
   } = useContext(TasksContext);
 
   // const animationRef = useRef(null);
@@ -29,6 +31,13 @@ export const Todoitem = memo(({ title, isDone, className = "", id }) => {
   // };
 
   const taskStatus = isDone ? "completed" : "incomplete";
+
+  // const highLightedTitle =
+  //   searchQuery.length > 0
+  //     ? title.replaceAll(new RegExp(searchQuery, "gi"), `<mark>$&</mark>`)
+  //     : title;
+
+  const highLightedTitle = highlightCaseInsensitive(title, searchQuery);
 
   return (
     <li
@@ -56,7 +65,8 @@ export const Todoitem = memo(({ title, isDone, className = "", id }) => {
         to={`/tasks/${id}`}
         aria-label={`View details for task: ${title}`}
       >
-        {title}
+        {/* {title} */}
+        <span dangerouslySetInnerHTML={{ __html: highLightedTitle }} />
       </RouterLink>
       <button
         className={styles.deleteButton}
